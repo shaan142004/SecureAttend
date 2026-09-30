@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SecureAttend — Faculty Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20 2 L35 8 V18 C35 27 29 33.5 20 38 C11 33.5 5 27 5 18 V8 Z' fill='%233A4B85' stroke='%235FAE84' stroke-width='1.5'/%3E%3Cpath d='M13 20 L18 25 L28 14' stroke='%23EDEBE3' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #EDEBE3;
+    --ink-soft: #9CA3B8;
+    --paper: #0F1015;
+    --paper-raised: #1A1C24;
+    --line: #2B2E38;
+    --verified: #5FAE84;
+    --verified-bg: #1C2E24;
+    --blocked: #E0806A;
+    --blocked-bg: #3A211C;
+    --amber: #E0A458;
+    --header-bg: #17181F;
+    --accent: #3A4B85;
+    --accent-hover: #4A5D9C;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+  }
+
+  .mono { font-family: 'IBM Plex Mono', monospace; }
+
+  header {
+    background: var(--header-bg);
+    color: var(--ink);
+    padding: 18px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .brandGroup { display: flex; align-items: center; gap: 12px; }
+  .brandGroup svg { display: block; flex-shrink: 0; }
+  header .brand { font-size: 20px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.1; }
+  header .brand span { color: #8C9BC9; font-weight: 400; display: block; font-size: 12px; margin-top: 2px; }
+  header .meta { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--ink-soft); }
+
+  /* ---------- Login / Register gate ---------- */
+  #loginGate { max-width: 380px; margin: 90px auto; padding: 32px; background: var(--paper-raised); border: 1px solid var(--line); }
+  #loginGate h2 { margin: 0 0 6px; font-size: 18px; }
+  #loginGate p { margin: 0 0 20px; font-size: 13px; color: var(--ink-soft); }
+
+  #loginGate input {
+    width: 100%; padding: 10px 12px; border: 1px solid var(--line);
+    background: #FFFFFF; color: #1A1C24;
+    font-family: 'IBM Plex Mono', monospace; font-size: 14px; margin-bottom: 12px;
+  }
+  #loginGate input::placeholder { color: #8A8D99; }
+
+  #loginGate button, .action-btn {
+    width: 100%; padding: 10px 12px; background: var(--accent); color: var(--ink);
+    border: none; font-family: 'IBM Plex Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer;
+  }
+  #loginGate button:hover, .action-btn:hover { background: var(--accent-hover); }
+
+  .gateError { color: var(--blocked); font-size: 13px; margin-top: 10px; display: none; }
+  .switchLink { margin-top: 16px !important; font-size: 13px; text-align: center; }
+  .switchLink a { color: #9FB4E8; text-decoration: none; }
+  .switchLink a:hover { text-decoration: underline; }
+
+  /* ---------- Main ---------- */
+  main { display: none; max-width: 1040px; margin: 0 auto; padding: 32px; }
+
+  .toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
+  .toolbar-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  .btn {
+    padding: 9px 16px; border: 1px solid var(--line); background: var(--paper-raised); color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer;
+  }
+  .btn:hover { background: #23262F; border-color: var(--accent); }
+  .btn.primary { background: var(--accent); color: var(--ink); border-color: var(--accent); }
+  .btn.primary:hover { background: var(--accent-hover); }
+  .btn.danger { border-color: var(--blocked); color: var(--blocked); }
+  .btn.danger:hover { background: var(--blocked-bg); }
+
+  /* ---------- Lecture cards ---------- */
+  #lectureList { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+
+  .lectureCard {
+    background: var(--paper-raised); border: 1px solid var(--line);
+    padding: 16px 18px; display: flex; justify-content: space-between; align-items: center;
+    gap: 12px; flex-wrap: wrap; cursor: pointer;
+  }
+  .lectureCard:hover { border-color: var(--accent); }
+  .lectureCard.active { border-color: var(--verified); }
+
+  .lectureCard .subject { font-weight: 600; font-size: 15px; }
+  .lectureCard .meta { font-size: 12px; color: var(--ink-soft); margin-top: 4px; }
+  .lectureCard .actions { display: flex; gap: 8px; }
+  .lectureCard .actions button { font-size: 12px; padding: 6px 10px; }
+
+  /* ---------- Lecture form ---------- */
+  #lectureForm {
+    background: var(--paper-raised); border: 1px solid var(--line);
+    padding: 20px; margin-bottom: 24px; display: none;
+  }
+  .formGrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; }
+  .formGrid label { display: flex; flex-direction: column; font-size: 12px; color: var(--ink-soft); gap: 6px; }
+  .formGrid input, .formGrid select {
+    padding: 9px 10px; border: 1px solid var(--line); background: #FFFFFF; color: #1A1C24; font-size: 13px;
+  }
+
+  /* ---------- Stat strip ---------- */
+  .stats { display: flex; gap: 40px; padding: 20px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-bottom: 24px; flex-wrap: wrap; }
+  .stat .value { font-family: 'IBM Plex Mono', monospace; font-size: 28px; font-weight: 500; line-height: 1; }
+  .stat .label { font-size: 12px; color: var(--ink-soft); margin-top: 6px; }
+  .stat.verified-stat .value { color: var(--verified); }
+
+  /* ---------- Table ---------- */
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  thead th { text-align: left; font-size: 12px; font-weight: 500; color: var(--ink-soft); padding: 0 12px 10px; border-bottom: 1px solid var(--ink); }
+  tbody td { padding: 13px 12px; border-bottom: 1px solid var(--line); }
+  tbody tr:hover { background: rgba(255,255,255,0.03); }
+  .roll { color: var(--ink-soft); font-size: 12px; }
+  .badge { display: inline-block; padding: 3px 9px; font-size: 11px; font-family: 'IBM Plex Mono', monospace; }
+  .badge.ok { background: var(--verified-bg); color: var(--verified); }
+  .badge.warn { background: #3D311D; color: var(--amber); }
+
+  #emptyState, #loadingState, #noLectureSelected {
+    padding: 60px 12px; text-align: center; color: var(--ink-soft); font-size: 14px; display: none;
+  }
+
+  #configWarning {
+    display: none; background: var(--blocked-bg); color: var(--blocked);
+    padding: 14px 16px; font-size: 13px; margin-bottom: 20px; border-left: 3px solid var(--blocked);
+  }
+
+  h2.sectionTitle { font-size: 16px; margin: 0 0 14px; }
+
+  footer { max-width: 1040px; margin: 0 auto; padding: 0 32px 40px; font-size: 12px; color: var(--ink-soft); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brandGroup">
+    <svg width="34" height="34" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 2 L35 8 V18 C35 27 29 33.5 20 38 C11 33.5 5 27 5 18 V8 Z" fill="#3A4B85" stroke="#5FAE84" stroke-width="1.5"/>
+      <path d="M13 20 L18 25 L28 14" stroke="#EDEBE3" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </svg>
+    <div class="brand">SecureAttend<span>Faculty Dashboard</span></div>
+  </div>
+  <div class="meta" id="clock"></div>
+</header>
+
+<!-- ============ LOGIN / REGISTER GATE ============ -->
+<div id="loginGate">
+  <div id="loginForm">
+    <h2>Faculty login</h2>
+    <p>Sign in with your faculty account to manage your lectures.</p>
+    <input type="email" id="loginEmail" placeholder="Email" autocomplete="username" />
+    <input type="password" id="loginPassword" placeholder="Password" autocomplete="current-password" />
+    <button id="loginBtn">Sign in</button>
+    <div id="loginError" class="gateError"></div>
+    <p class="switchLink">New faculty member? <a href="#" id="showRegister">Create an account</a></p>
+  </div>
+
+  <div id="registerForm" style="display:none;">
+    <h2>Create faculty account</h2>
+    <p>Register once — you'll sign in with this from now on.</p>
+    <input type="text" id="registerName" placeholder="Full name" />
+    <input type="email" id="registerEmail" placeholder="Email" autocomplete="username" />
+    <input type="password" id="registerPassword" placeholder="Password (min 6 characters)" autocomplete="new-password" />
+    <button id="registerBtn">Create account</button>
+    <div id="registerError" class="gateError"></div>
+    <p class="switchLink">Already have an account? <a href="#" id="showLogin">Sign in</a></p>
+  </div>
+</div>
+
+<!-- ============ MAIN DASHBOARD ============ -->
+<main id="main">
+
+  <div id="configWarning">
+    Firebase is not connected yet. Open this file and fill in <span class="mono">firebaseConfig</span>
+    near the bottom with the values from your Firebase Console (Project Settings → General → Your apps → Web app).
+  </div>
+
+  <div class="toolbar">
+    <div>
+      <strong>My Lectures</strong>
+      <span class="roll" id="loggedInAs" style="margin-left:8px;"></span>
+    </div>
+    <div class="toolbar-buttons">
+      <button class="btn primary" id="addLectureBtn">+ Add Lecture</button>
+      <button class="btn" id="logoutBtn">Log out</button>
+    </div>
+  </div>
+
+  <!-- Add / Edit lecture form -->
+  <div id="lectureForm">
+    <h2 class="sectionTitle" id="formTitle">Add Lecture</h2>
+    <div class="formGrid">
+      <label>Subject
+        <input type="text" id="fSubject" placeholder="Data Structures" />
+      </label>
+      <label>Day
+        <select id="fDay">
+          <option>Daily</option><option>Mon</option><option>Tue</option><option>Wed</option>
+          <option>Thu</option><option>Fri</option><option>Sat</option><option>Sun</option>
+        </select>
+      </label>
+      <label>Start Time (24hr)
+        <input type="time" id="fStart" />
+      </label>
+      <label>End Time (24hr)
+        <input type="time" id="fEnd" />
+      </label>
+      <label>Classroom Name
+        <input type="text" id="fClassroomName" placeholder="Lab 101" />
+      </label>
+      <label>Router BSSID
+        <input type="text" id="fBssid" class="mono" placeholder="aa:bb:cc:dd:ee:ff" />
+      </label>
+      <label>Latitude
+        <input type="text" id="fLat" class="mono" />
+      </label>
+      <label>Longitude
+        <input type="text" id="fLng" class="mono" />
+      </label>
+      <label style="justify-content:flex-end;">
+        <span>&nbsp;</span>
+        <button class="btn" id="useMyLocationBtn" type="button">Use My Location</button>
+      </label>
+      <label>Allowed Radius (metres)
+        <input type="text" id="fRadius" class="mono" value="5" />
+      </label>
+    </div>
+    <div class="toolbar-buttons" style="margin-top:16px;">
+      <button class="btn primary" id="saveLectureBtn">Save Lecture</button>
+      <button class="btn" id="cancelFormBtn">Cancel</button>
+      <button class="btn danger" id="deleteLectureBtn" style="display:none;">Delete Lecture</button>
+      <span id="formStatus" class="mono" style="align-self:center; font-size:12px;"></span>
+    </div>
+    <p style="font-size:12px; color:var(--ink-soft); margin-top:10px;">
+      Note: the browser can auto-fill location via "Use My Location", but can't read a Wi-Fi router's BSSID directly — grab that from the SecureAttend app's lecture form while standing in the room, then paste it here.
+    </p>
+  </div>
+
+  <div id="lectureList"></div>
+  <div id="lecturesEmpty" style="display:none; color:var(--ink-soft); font-size:14px; margin-bottom:24px;">
+    No lectures yet. Click "+ Add Lecture" to create your first one.
+  </div>
+
+  <!-- Attendance for the selected lecture -->
+  <div id="attendanceSection" style="display:none;">
+    <h2 class="sectionTitle" id="attendanceTitle">Attendance</h2>
+
+    <div class="stats">
+      <div class="stat verified-stat">
+        <div class="value" id="statPresent">0</div>
+        <div class="label">Total marked</div>
+      </div>
+      <div class="stat">
+        <div class="value" id="statAvgDistance">—</div>
+        <div class="label">Avg. distance from router</div>
+      </div>
+      <div class="stat">
+        <div class="value mono" id="statLastMarked">—</div>
+        <div class="label">Last marked</div>
+      </div>
+    </div>
+
+    <div class="toolbar-buttons" style="margin-bottom:16px;">
+      <button class="btn" id="refreshAttendanceBtn">Refresh</button>
+      <button class="btn" id="exportBtn">Export CSV</button>
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>Student</th><th>Roll No.</th><th>Time</th><th>Distance</th><th>Verification</th></tr>
+      </thead>
+      <tbody id="attendanceBody"></tbody>
+    </table>
+
+    <div id="loadingState">Loading attendance records…</div>
+    <div id="emptyState">No attendance marked for this lecture yet.</div>
+  </div>
+
+  <div id="noLectureSelected">Select a lecture above to view its attendance.</div>
+
+</main>
+
+<footer>
+  SecureAttend Faculty Dashboard — reads live from the same Firestore database as the mobile app.
+</footer>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import {
+    getFirestore, collection, query, where, getDocs,
+    doc, getDoc, setDoc, addDoc, updateDoc, deleteDoc
+  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  import {
+    getAuth, onAuthStateChanged, signInWithEmailAndPassword,
+    createUserWithEmailAndPassword, signOut, updateProfile
+  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCSTccArfmP7ioN-2pUGZ_uPcyR5uDzsYI",
+    authDomain: "attend-ccce4.firebaseapp.com",
+    projectId: "attend-ccce4",
+    storageBucket: "attend-ccce4.firebasestorage.app",
+    messagingSenderId: "29601567648",
+    appId: "1:29601567648:web:158b1e4d777445bc7ecac5",
+    measurementId: "G-QHZM11TFKT"
+  };
+
+  const CONFIG_IS_PLACEHOLDER = firebaseConfig.apiKey === "YOUR_API_KEY";
+
+  let db = null, auth = null;
+  if (!CONFIG_IS_PLACEHOLDER) {
+    const app = initializeApp(firebaseConfig);
+    db = getFirestore(app);
+    auth = getAuth(app);
+  } else {
+    document.getElementById("configWarning").style.display = "block";
+  }
+
+  let currentUid = null;
+  let myLectures = [];
+  let selectedLectureId = null;
+  let latestRecords = [];
+
+  document.getElementById("showRegister").addEventListener("click", (e) => {
+    e.preventDefault();
+    document.getElementById("loginForm").style.display = "none";
+    document.getElementById("registerForm").style.display = "block";
+  });
+  document.getElementById("showLogin").addEventListener("click", (e) => {
+    e.preventDefault();
+    document.getElementById("registerForm").style.display = "none";
+    document.getElementById("loginForm").style.display = "block";
+  });
+
+  document.getElementById("loginBtn").addEventListener("click", tryLogin);
+  document.getElementById("loginPassword").addEventListener("keydown", (e) => { if (e.key === "Enter") tryLogin(); });
+
+  function tryLogin() {
+    if (!auth) return;
+    const email = document.getElementById("loginEmail").value.trim();
+    const password = document.getElementById("loginPassword").value;
+    const errorEl = document.getElementById("loginError");
+    errorEl.style.display = "none";
+
+    signInWithEmailAndPassword(auth, email, password)
+      .catch((err) => { errorEl.textContent = friendlyAuthError(err); errorEl.style.display = "block"; });
+  }
+
+  document.getElementById("registerBtn").addEventListener("click", tryRegister);
+
+  function tryRegister() {
+    if (!auth) return;
+    const name = document.getElementById("registerName").value.trim();
+    const email = document.getElementById("registerEmail").value.trim();
+    const password = document.getElementById("registerPassword").value;
+    const errorEl = document.getElementById("registerError");
+    errorEl.style.display = "none";
+
+    if (!name || !email || password.length < 6) {
+      errorEl.textContent = "Please fill all fields (password min 6 characters).";
+      errorEl.style.display = "block";
+      return;
+    }
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(async (result) => {
+        await updateProfile(result.user, { displayName: name });
+        await setDoc(doc(db, "teachers", result.user.uid), { uid: result.user.uid, name, email });
+      })
+      .catch((err) => { errorEl.textContent = friendlyAuthError(err); errorEl.style.display = "block"; });
+  }
+
+  function friendlyAuthError(err) {
+    switch (err.code) {
+      case "auth/invalid-email": return "That email address doesn't look right.";
+      case "auth/user-not-found":
+      case "auth/wrong-password":
+      case "auth/invalid-credential": return "Incorrect email or password.";
+      case "auth/email-already-in-use": return "An account already exists for that email — try signing in instead.";
+      case "auth/weak-password": return "Password must be at least 6 characters.";
+      default: return err.message || "Something went wrong. Please try again.";
+    }
+  }
+
+  if (auth) {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        currentUid = user.uid;
+        document.getElementById("loginGate").style.display = "none";
+        document.getElementById("main").style.display = "block";
+        document.getElementById("loggedInAs").textContent = "— " + (user.displayName || user.email);
+        loadMyLectures();
+      } else {
+        currentUid = null;
+        document.getElementById("loginGate").style.display = "block";
+        document.getElementById("main").style.display = "none";
+      }
+    });
+  }
+
+  document.getElementById("logoutBtn").addEventListener("click", () => { if (auth) signOut(auth); });
+
+  function tickClock() {
+    document.getElementById("clock").textContent =
+      new Date().toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" });
+  }
+  tickClock();
+  setInterval(tickClock, 1000 * 30);
+
+  document.getElementById("addLectureBtn").addEventListener("click", () => openLectureForm(null));
+  document.getElementById("cancelFormBtn").addEventListener("click", closeLectureForm);
+
+  function openLectureForm(lecture) {
+    const form = document.getElementById("lectureForm");
+    form.style.display = "block";
+    document.getElementById("formStatus").textContent = "";
+
+    if (lecture) {
+      document.getElementById("formTitle").textContent = "Edit Lecture";
+      document.getElementById("fSubject").value = lecture.subject || "";
+      document.getElementById("fDay").value = lecture.dayOfWeek || "Daily";
+      document.getElementById("fStart").value = lecture.startTime || "";
+      document.getElementById("fEnd").value = lecture.endTime || "";
+      document.getElementById("fClassroomName").value = lecture.classroomName || "";
+      document.getElementById("fBssid").value = lecture.routerBssid || "";
+      document.getElementById("fLat").value = lecture.latitude ?? "";
+      document.getElementById("fLng").value = lecture.longitude ?? "";
+      document.getElementById("fRadius").value = lecture.allowedRadiusMeters ?? 5;
+      document.getElementById("deleteLectureBtn").style.display = "inline-block";
+      document.getElementById("deleteLectureBtn").dataset.lectureId = lecture.lectureId;
+      document.getElementById("saveLectureBtn").dataset.lectureId = lecture.lectureId;
+    } else {
+      document.getElementById("formTitle").textContent = "Add Lecture";
+      ["fSubject","fBssid","fLat","fLng"].forEach(id => document.getElementById(id).value = "");
+      document.getElementById("fDay").value = "Daily";
+      document.getElementById("fStart").value = "";
+      document.getElementById("fEnd").value = "";
+      document.getElementById("fClassroomName").value = "";
+      document.getElementById("fRadius").value = 5;
+      document.getElementById("deleteLectureBtn").style.display = "none";
+      delete document.getElementById("saveLectureBtn").dataset.lectureId;
+    }
+    form.scrollIntoView({ behavior: "smooth" });
+  }
+
+  function closeLectureForm() {
+    document.getElementById("lectureForm").style.display = "none";
+  }
+
+  document.getElementById("useMyLocationBtn").addEventListener("click", () => {
+    const statusEl = document.getElementById("formStatus");
+    if (!navigator.geolocation) {
+      statusEl.textContent = "Geolocation isn't supported by this browser.";
+      statusEl.style.color = "var(--blocked)";
+      return;
+    }
+    statusEl.textContent = "Getting your location...";
+    statusEl.style.color = "var(--ink-soft)";
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        document.getElementById("fLat").value = position.coords.latitude.toFixed(6);
+        document.getElementById("fLng").value = position.coords.longitude.toFixed(6);
+        statusEl.textContent = "Filled in current location (accuracy ~" + Math.round(position.coords.accuracy) + "m).";
+        statusEl.style.color = "var(--verified)";
+      },
+      () => {
+        statusEl.textContent = "Couldn't get location — allow location access in the browser and try again.";
+        statusEl.style.color = "var(--blocked)";
+      },
+      { enableHighAccuracy: true, timeout: 10000 }
+    );
+  });
+
+  document.getElementById("saveLectureBtn").addEventListener("click", async () => {
+    if (!db || !currentUid) return;
+    const statusEl = document.getElementById("formStatus");
+
+    const subject = document.getElementById("fSubject").value.trim();
+    const dayOfWeek = document.getElementById("fDay").value;
+    const startTime = document.getElementById("fStart").value;
+    const endTime = document.getElementById("fEnd").value;
+    const classroomName = document.getElementById("fClassroomName").value.trim();
+    const routerBssid = document.getElementById("fBssid").value.trim();
+    const latitude = parseFloat(document.getElementById("fLat").value);
+    const longitude = parseFloat(document.getElementById("fLng").value);
+    const allowedRadiusMeters = parseFloat(document.getElementById("fRadius").value);
+
+    if (!subject || !startTime || !endTime || !classroomName || !routerBssid ||
+        isNaN(latitude) || isNaN(longitude) || isNaN(allowedRadiusMeters)) {
+      statusEl.textContent = "Please fill all fields with valid values.";
+      statusEl.style.color = "var(--blocked)";
+      return;
+    }
+
+    const teacherName = auth.currentUser?.displayName || auth.currentUser?.email || "Teacher";
+    const existingId = document.getElementById("saveLectureBtn").dataset.lectureId;
+
+    const data = {
+      teacherUid: currentUid, teacherName, subject, dayOfWeek, startTime, endTime,
+      classroomName, routerBssid, latitude, longitude, allowedRadiusMeters
+    };
+
+    statusEl.textContent = "Saving...";
+    statusEl.style.color = "var(--ink-soft)";
+
+    try {
+      if (existingId) {
+        await updateDoc(doc(db, "lectures", existingId), data);
+      } else {
+        const ref = await addDoc(collection(db, "lectures"), data);
+        await updateDoc(ref, { lectureId: ref.id });
+      }
+      closeLectureForm();
+      loadMyLectures();
+    } catch (err) {
+      console.error(err);
+      statusEl.textContent = "Failed to save. Check your connection.";
+      statusEl.style.color = "var(--blocked)";
+    }
+  });
+
+  document.getElementById("deleteLectureBtn").addEventListener("click", async () => {
+    if (!db) return;
+    const id = document.getElementById("deleteLectureBtn").dataset.lectureId;
+    if (!id || !confirm("Delete this lecture? This cannot be undone.")) return;
+    try {
+      await deleteDoc(doc(db, "lectures", id));
+      closeLectureForm();
+      if (selectedLectureId === id) {
+        selectedLectureId = null;
+        document.getElementById("attendanceSection").style.display = "none";
+      }
+      loadMyLectures();
+    } catch (err) {
+      console.error(err);
+      document.getElementById("formStatus").textContent = "Failed to delete.";
+      document.getElementById("formStatus").style.color = "var(--blocked)";
+    }
+  });
+
+  async function loadMyLectures() {
+    if (!db || !currentUid) return;
+    const listEl = document.getElementById("lectureList");
+    listEl.innerHTML = "";
+
+    try {
+      const q = query(collection(db, "lectures"), where("teacherUid", "==", currentUid));
+      const snap = await getDocs(q);
+      myLectures = snap.docs.map(d => d.data());
+    } catch (err) {
+      console.error("Failed to load lectures:", err);
+      myLectures = [];
+    }
+
+    document.getElementById("lecturesEmpty").style.display = myLectures.length === 0 ? "block" : "none";
+
+    for (const lecture of myLectures) {
+      const card = document.createElement("div");
+      card.className = "lectureCard" + (lecture.lectureId === selectedLectureId ? " active" : "");
+      card.innerHTML = `
+        <div>
+          <div class="subject">${escapeHtml(lecture.subject)}</div>
+          <div class="meta mono">${lecture.dayOfWeek} · ${lecture.startTime}-${lecture.endTime} · ${escapeHtml(lecture.classroomName)}</div>
+        </div>
+        <div class="actions">
+          <button class="btn" data-action="edit">Edit</button>
+          <button class="btn primary" data-action="view">View Attendance</button>
+        </div>
+      `;
+      card.querySelector('[data-action="edit"]').addEventListener("click", (e) => {
+        e.stopPropagation();
+        openLectureForm(lecture);
+      });
+      card.querySelector('[data-action="view"]').addEventListener("click", (e) => {
+        e.stopPropagation();
+        selectLecture(lecture);
+      });
+      listEl.appendChild(card);
+    }
+  }
+
+  function selectLecture(lecture) {
+    selectedLectureId = lecture.lectureId;
+    document.getElementById("attendanceSection").style.display = "block";
+    document.getElementById("noLectureSelected").style.display = "none";
+    document.getElementById("attendanceTitle").textContent = `Attendance — ${lecture.subject}`;
+    loadMyLectures();
+    loadAttendance();
+  }
+
+  document.getElementById("refreshAttendanceBtn").addEventListener("click", loadAttendance);
+
+  async function loadAttendance() {
+    if (!db || !selectedLectureId) return;
+
+    document.getElementById("loadingState").style.display = "block";
+    document.getElementById("emptyState").style.display = "none";
+    document.getElementById("attendanceBody").innerHTML = "";
+
+    try {
+      const q = query(collection(db, "attendance"), where("lectureId", "==", selectedLectureId));
+      const snapshot = await getDocs(q);
+      latestRecords = snapshot.docs.map(d => d.data()).sort((a, b) => b.timestamp - a.timestamp);
+    } catch (err) {
+      console.error("Failed to load attendance:", err);
+      latestRecords = [];
+    }
+
+    document.getElementById("loadingState").style.display = "none";
+    renderTable(latestRecords);
+    renderStats(latestRecords);
+  }
+
+  function renderTable(records) {
+    const body = document.getElementById("attendanceBody");
+    body.innerHTML = "";
+
+    if (records.length === 0) {
+      document.getElementById("emptyState").style.display = "block";
+      return;
+    }
+    document.getElementById("emptyState").style.display = "none";
+
+    for (const r of records) {
+      const tr = document.createElement("tr");
+      const time = new Date(r.timestamp).toLocaleString("en-IN", { dateStyle: "short", timeStyle: "short" });
+      const distance = typeof r.distanceFromRouterMeters === "number" ? r.distanceFromRouterMeters.toFixed(1) + "m" : "—";
+      const allVerified = r.fingerprintVerified && r.wifiVerified && r.locationVerified;
+
+      tr.innerHTML = `
+        <td>${escapeHtml(r.studentName || "Unknown")}</td>
+        <td class="roll mono">${escapeHtml(r.rollNumber || "-")}</td>
+        <td class="mono">${time}</td>
+        <td class="mono">${distance}</td>
+        <td><span class="badge ${allVerified ? "ok" : "warn"}">${allVerified ? "Verified" : "Partial"}</span></td>
+      `;
+      body.appendChild(tr);
+    }
+  }
+
+  function renderStats(records) {
+    document.getElementById("statPresent").textContent = records.length;
+    if (records.length > 0) {
+      const avgDist = records.reduce((sum, r) => sum + (r.distanceFromRouterMeters || 0), 0) / records.length;
+      document.getElementById("statAvgDistance").textContent = avgDist.toFixed(1) + "m";
+      document.getElementById("statLastMarked").textContent =
+        new Date(records[0].timestamp).toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" });
+    } else {
+      document.getElementById("statAvgDistance").textContent = "—";
+      document.getElementById("statLastMarked").textContent = "—";
+    }
+  }
+
+  function escapeHtml(str) {
+    const div = document.createElement("div");
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  document.getElementById("exportBtn").addEventListener("click", () => {
+    if (latestRecords.length === 0) return;
+    const header = "Student,Roll Number,Time,Distance (m),Fingerprint,WiFi,Location\n";
+    const rows = latestRecords.map(r => [
+      r.studentName, r.rollNumber,
+      new Date(r.timestamp).toLocaleString("en-IN"),
+      r.distanceFromRouterMeters?.toFixed(1) ?? "",
+      r.fingerprintVerified, r.wifiVerified, r.locationVerified
+    ].join(",")).join("\n");
+
+    const blob = new Blob([header + rows], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `attendance_${selectedLectureId}_${new Date().toISOString().slice(0,10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+</script>
+
+</body>
+</html>
