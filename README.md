@@ -1,6 +1,7 @@
 # SecureAttend
 
-Fingerprint + Wi-Fi BSSID + 5-metre GPS verified attendance app (Android, Kotlin).
+Fingerprint + Wi-Fi BSSID + 5-metre GPS-verified attendance app (Android, Kotlin).
+
 SecureAttend is a secure attendance management system consisting of an Android mobile application and a web-based Faculty Dashboard. The Android application allows students to mark attendance for lectures created by teachers. Before attendance is recorded, the system performs fingerprint, Wi-Fi, and GPS-based verification to help ensure that attendance is being marked by the correct student at the required location. Attendance records are associated with the relevant lecture, subject, and teacher. The Faculty Dashboard provides teachers with a web interface to view attendance information.
 
 ## What's inside
