@@ -1,0 +1,42 @@
+[
+    {
+        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\9.7.1\\com.secureattend.app-mergeDebugResources-42:\\layout\\activity_faculty_dashboard.xml",
+        "source": "C:\\Users\\Admin\\.gradle\\daemon\\9.7.1\\com.secureattend.app-main-45:\\layout\\activity_faculty_dashboard.xml"
+    },
+    {
+        "merged": "com.secureattend.app-mergeDebugResources-42:/layout/activity_lecture_attendance.xml",
+        "source": "com.secureattend.app-main-45:/layout/activity_lecture_attendance.xml"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\9.7.1\\com.secureattend.app-mergeDebugResources-42:\\layout\\activity_classroom_settings.xml",
+        "source": "C:\\Users\\Admin\\.gradle\\daemon\\9.7.1\\com.secureattend.app-main-45:\\layout\\activity_classroom_settings.xml"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\9.7.1\\com.secureattend.app-mergeDebugResources-42:\\layout\\item_attendance_row.xml",
+        "source": "C:\\Users\\Admin\\.gradle\\daemon\\9.7.1\\com.secureattend.app-main-45:\\layout\\item_attendance_row.xml"
+    },
+    {
+        "merged": "com.secureattend.app-mergeDebugResources-42:/layout/activity_lecture_form.xml",
+        "source": "com.secureattend.app-main-45:/layout/activity_lecture_form.xml"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\9.7.1\\com.secureattend.app-mergeDebugResources-42:\\layout\\activity_login.xml",
+        "source": "C:\\Users\\Admin\\.gradle\\daemon\\9.7.1\\com.secureattend.app-main-45:\\layout\\activity_login.xml"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\9.7.1\\com.secureattend.app-mergeDebugResources-42:\\layout\\activity_mark_attendance.xml",
+        "source": "C:\\Users\\Admin\\.gradle\\daemon\\9.7.1\\com.secureattend.app-main-45:\\layout\\activity_mark_attendance.xml"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\9.7.1\\com.secureattend.app-mergeDebugResources-42:\\layout\\activity_register.xml",
+        "source": "C:\\Users\\Admin\\.gradle\\daemon\\9.7.1\\com.secureattend.app-main-45:\\layout\\activity_register.xml"
+    },
+    {
+        "merged": "com.secureattend.app-mergeDebugResources-42:/layout/activity_select_lecture.xml",
+        "source": "com.secureattend.app-main-45:/layout/activity_select_lecture.xml"
+    },
+    {
+        "merged": "com.secureattend.app-mergeDebugResources-42:/layout/activity_faculty_dashboard.xml",
+        "source": "com.secureattend.app-main-45:/layout/activity_faculty_dashboard.xml"
+    }
+]

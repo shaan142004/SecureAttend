@@ -1,0 +1,6 @@
+com.secureattend.app.test.app-androidTest-0 C:\Users\Admin\OneDrive\Desktop\app for project\SecureAttend\app\build\generated\res\resValues\androidTest\debug
+com.secureattend.app.test.app-updated_navigation_xml-1 C:\Users\Admin\OneDrive\Desktop\app for project\SecureAttend\app\build\generated\updated_navigation_xml\debugAndroidTest
+com.secureattend.app.test.app-mergeDebugAndroidTestResources-2 C:\Users\Admin\OneDrive\Desktop\app for project\SecureAttend\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
+com.secureattend.app.test.app-mergeDebugAndroidTestResources-3 C:\Users\Admin\OneDrive\Desktop\app for project\SecureAttend\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
+com.secureattend.app.test.app-debugAndroidTest-4 C:\Users\Admin\OneDrive\Desktop\app for project\SecureAttend\app\build\intermediates\merged_res\debugAndroidTest\mergeDebugAndroidTestResources
+gradleHome-0 C:\Users\Admin\.gradle

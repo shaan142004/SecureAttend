@@ -1,0 +1,54 @@
+[
+    {
+        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\9.7.1\\com.secureattend.app-debug-43:\\layout_activity_mark_attendance.xml.flat",
+        "source": "C:\\Users\\Admin\\.gradle\\daemon\\9.7.1\\com.secureattend.app-main-45:\\layout\\activity_mark_attendance.xml"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\9.7.1\\com.secureattend.app-debug-43:\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\Admin\\.gradle\\daemon\\9.7.1\\com.secureattend.app-main-45:\\drawable\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\9.7.1\\com.secureattend.app-debug-43:\\drawable_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\Admin\\.gradle\\daemon\\9.7.1\\com.secureattend.app-main-45:\\drawable\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.secureattend.app-debug-43:/layout_activity_lecture_attendance.xml.flat",
+        "source": "com.secureattend.app-main-45:/layout/activity_lecture_attendance.xml"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\9.7.1\\com.secureattend.app-debug-43:\\layout_activity_faculty_dashboard.xml.flat",
+        "source": "C:\\Users\\Admin\\.gradle\\daemon\\9.7.1\\com.secureattend.app-main-45:\\layout\\activity_faculty_dashboard.xml"
+    },
+    {
+        "merged": "com.secureattend.app-debug-43:/layout_activity_select_lecture.xml.flat",
+        "source": "com.secureattend.app-main-45:/layout/activity_select_lecture.xml"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\9.7.1\\com.secureattend.app-debug-43:\\layout_activity_classroom_settings.xml.flat",
+        "source": "C:\\Users\\Admin\\.gradle\\daemon\\9.7.1\\com.secureattend.app-main-45:\\layout\\activity_classroom_settings.xml"
+    },
+    {
+        "merged": "com.secureattend.app-debug-43:/layout_activity_faculty_dashboard.xml.flat",
+        "source": "com.secureattend.app-main-45:/layout/activity_faculty_dashboard.xml"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\9.7.1\\com.secureattend.app-debug-43:\\layout_activity_register.xml.flat",
+        "source": "C:\\Users\\Admin\\.gradle\\daemon\\9.7.1\\com.secureattend.app-main-45:\\layout\\activity_register.xml"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\9.7.1\\com.secureattend.app-debug-43:\\layout_activity_login.xml.flat",
+        "source": "C:\\Users\\Admin\\.gradle\\daemon\\9.7.1\\com.secureattend.app-main-45:\\layout\\activity_login.xml"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\9.7.1\\com.secureattend.app-debug-43:\\layout_item_attendance_row.xml.flat",
+        "source": "C:\\Users\\Admin\\.gradle\\daemon\\9.7.1\\com.secureattend.app-main-45:\\layout\\item_attendance_row.xml"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\9.7.1\\com.secureattend.app-debug-43:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\Admin\\.gradle\\daemon\\9.7.1\\com.secureattend.app-main-45:\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "com.secureattend.app-debug-43:/layout_activity_lecture_form.xml.flat",
+        "source": "com.secureattend.app-main-45:/layout/activity_lecture_form.xml"
+    }
+]

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Needed to check fingerprint hardware / prompt biometric auth -->
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+
+    <!-- Needed to read the connected Wi-Fi's BSSID -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- On Android 8.1+, reading BSSID also requires location permission -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <!-- Needed for GPS radius check -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="SecureAttend"
+        android:theme="@style/Theme.SecureAttend"
+        android:usesCleartextTraffic="false">
+
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".RegisterActivity" android:exported="false" />
+        <activity android:name=".MarkAttendanceActivity" android:exported="false" />
+        <activity android:name=".FacultyDashboardActivity" android:exported="false" />
+        <activity android:name=".SelectLectureActivity" android:exported="false" />
+        <activity android:name=".LectureFormActivity" android:exported="false" />
+        <activity android:name=".LectureAttendanceActivity" android:exported="false" />
+    </application>
+</manifest>

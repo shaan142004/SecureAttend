@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Lecture"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="20dp" />
+
+        <EditText
+            android:id="@+id/etSubject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Subject (e.g. Data Structures)" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Day"
+            android:textSize="12sp"
+            android:textColor="#5f6368"
+            android:layout_marginTop="14dp" />
+
+        <Spinner
+            android:id="@+id/spinnerDay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/etStartTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Start Time (24hr, e.g. 09:00)"
+            android:layout_marginTop="10dp" />
+
+        <EditText
+            android:id="@+id/etEndTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="End Time (24hr, e.g. 10:00)"
+            android:layout_marginTop="10dp" />
+
+        <EditText
+            android:id="@+id/etClassroomName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Classroom Name"
+            android:layout_marginTop="16dp" />
+
+        <EditText
+            android:id="@+id/etBssid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Router BSSID"
+            android:layout_marginTop="10dp" />
+
+        <Button
+            android:id="@+id/btnUseCurrentWifi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Use Current Wi-Fi"
+            android:layout_marginTop="6dp" />
+
+        <EditText
+            android:id="@+id/etLat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Latitude"
+            android:inputType="numberDecimal|numberSigned"
+            android:layout_marginTop="16dp" />
+
+        <EditText
+            android:id="@+id/etLng"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Longitude"
+            android:inputType="numberDecimal|numberSigned"
+            android:layout_marginTop="10dp" />
+
+        <Button
+            android:id="@+id/btnUseCurrentLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Use Current Location"
+            android:layout_marginTop="6dp" />
+
+        <EditText
+            android:id="@+id/etRadius"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Allowed Radius (metres)"
+            android:inputType="numberDecimal"
+            android:layout_marginTop="16dp" />
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Create Lecture"
+            android:backgroundTint="#1a73e8"
+            android:layout_marginTop="20dp" />
+
+        <Button
+            android:id="@+id/btnDelete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Delete Lecture"
+            android:backgroundTint="#d93025"
+            android:visibility="gone"
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="16dp" />
+
+    </LinearLayout>
+</ScrollView>
