@@ -8,6 +8,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.secureattend.app.databinding.ActivityRegisterBinding
 import com.secureattend.app.model.Student
 import com.secureattend.app.utils.BiometricAuthHelper
+import com.secureattend.app.utils.DeviceUtils
 import com.secureattend.app.utils.FirestoreRepository
 
 class RegisterActivity : AppCompatActivity() {
@@ -54,7 +55,8 @@ class RegisterActivity : AppCompatActivity() {
                         prnNumber = prn,
                         className = className,
                         email = email,
-                        mobile = mobile
+                        mobile = mobile,
+                        deviceId = DeviceUtils.getDeviceId(this)
                     )
                     FirestoreRepository.saveStudent(student) { success ->
                         if (success) {

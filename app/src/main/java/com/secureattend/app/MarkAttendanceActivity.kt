@@ -137,7 +137,8 @@ class MarkAttendanceActivity : AppCompatActivity() {
                 fingerprintVerified = true,
                 wifiVerified = true,
                 locationVerified = true,
-                distanceFromRouterMeters = distance
+                distanceFromRouterMeters = distance,
+                deviceId = student?.deviceId ?: ""
             )
 
             FirestoreRepository.saveAttendanceRecord(record) { success ->

@@ -17,5 +17,6 @@ data class AttendanceRecord(
     val fingerprintVerified: Boolean = false,
     val wifiVerified: Boolean = false,
     val locationVerified: Boolean = false,
-    val distanceFromRouterMeters: Float = -1f
+    val distanceFromRouterMeters: Float = -1f,
+    val deviceId: String = ""
 )

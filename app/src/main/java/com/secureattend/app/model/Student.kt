@@ -13,5 +13,6 @@ data class Student(
     val prnNumber: String = "",
     val className: String = "",
     val email: String = "",
-    val mobile: String = ""
+    val mobile: String = "",
+    val deviceId: String = ""
 )

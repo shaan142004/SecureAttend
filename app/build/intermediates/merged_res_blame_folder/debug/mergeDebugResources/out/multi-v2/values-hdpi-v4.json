@@ -4,7 +4,7 @@
             "outputFile": "com.secureattend.app-mergeDebugResources-41:/values-hdpi-v4/values-hdpi-v4.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Admin\\.gradle\\caches\\9.7.1\\transforms\\0cc343e1c18ab718bbdcf2e2f02ca7cc\\transformed\\appcompat-1.7.0\\res\\values-hdpi-v4\\values-hdpi-v4.xml",
+                    "source": "C:\\Users\\Admin\\.gradle\\caches\\9.7.1\\transforms\\7cd7cc9dae1264ad5b897028df2292ab\\transformed\\appcompat-1.7.0\\res\\values-hdpi-v4\\values-hdpi-v4.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

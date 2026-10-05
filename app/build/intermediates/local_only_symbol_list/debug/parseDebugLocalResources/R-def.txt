@@ -1,6 +1,7 @@
 R_DEF: Internal format may change without notice
 local
 color black
+color ic_launcher_background
 color purple_500
 color white
 drawable ic_launcher_background
@@ -54,6 +55,8 @@ layout activity_register
 layout activity_select_lecture
 layout item_attendance_row
 mipmap ic_launcher
+mipmap ic_launcher_foreground
+mipmap ic_launcher_round
 string app_name
 string default_web_client_id
 string gcm_defaultSenderId
